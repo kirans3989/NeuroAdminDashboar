@@ -87,3 +87,15 @@ pnpm build
 ```
 
 The built files will be in the `dist` directory, ready to be deployed.
+
+--------------------------------------------
+1. Create a Dockerfile
+2. Create a .dockerignore
+3. Build Docker Image
+   From the NeuroAdminDashboar directory:
+   docker build -t neuro-admin-ui .
+4. Run the Container
+   docker run -d -p 3000:80 --name neuro-admin-ui neuro-admin-ui
+   Then visit:
+📍 http://<your-ec2-public-ip>:3000
+
