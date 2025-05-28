@@ -89,6 +89,83 @@ pnpm build
 The built files will be in the `dist` directory, ready to be deployed.
 
 --------------------------------------------
-<pre> ```bash # Neuro Admin Dashboard – Docker Deployment Guide # Step 1: Create a Dockerfile # Place the Dockerfile in the root of your NeuroAdminDashboar project. # It should define build and runtime instructions for your app. # Step 2: Create a .dockerignore file # This helps avoid sending unnecessary files to the Docker build context. # Sample .dockerignore content: node_modules dist .git Dockerfile .dockerignore # Step 3: Build the Docker Image # Run the following command from the NeuroAdminDashboar directory: docker build -t neuro-admin-ui . # Step 4: Run the Docker Container # Start a container and expose it on port 3000: docker run -d -p 3000:80 --name neuro-admin-ui neuro-admin-ui # Access the application in your browser: http://<your-ec2-public-ip>:3000 # Replace <your-ec2-public-ip> with the actual public IP of your EC2 instance. # ✅ Your Neuro Admin Dashboard is now running in a Docker container! ``` </pre>
+# NeuroAdminDashboard Docker Setup
+
+This README provides instructions for containerizing the NeuroAdminDashboard application using Docker.
+
+## Docker Setup Instructions
+
+### 1. Create a Dockerfile
+
+Create a file named `Dockerfile` in the root directory of your project with the following content:
+
+```
+# Use Node.js as the base image for building
+FROM node:18-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Use Nginx to serve the built application
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+### 2. Create a .dockerignore
+
+Create a file named `.dockerignore` in the root directory of your project:
+
+```
+node_modules
+npm-debug.log
+build
+.git
+.github
+.gitignore
+README.md
+.env.local
+.env.development
+```
+
+### 3. Build Docker Image
+
+From the NeuroAdminDashboard directory:
+
+```
+docker build -t neuro-admin-ui .
+```
+
+### 4. Run the Container
+
+```
+docker run -d -p 3000:80 --name neuro-admin-ui neuro-admin-ui
+```
+
+Then visit:
+📍 http://<your-ec2-public-ip>:3000
+
+## Additional Information
+
+- The Docker image uses a multi-stage build process to keep the final image size small
+- The application is served using Nginx for better performance
+- Port 3000 on the host is mapped to port 80 in the container
+
+## Troubleshooting
+
+If you encounter issues:
+
+- Ensure Docker is properly installed and running
+- Check if port 3000 is already in use on your host machine
+- Verify your application builds correctly outside of Docker
+```
+
+
+
+
 
 
