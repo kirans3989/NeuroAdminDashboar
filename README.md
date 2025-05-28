@@ -147,8 +147,9 @@ docker run -d -p 3000:80 --name neuro-admin-ui neuro-admin-ui
 ```
 
 Then visit:
-📍 http://<your-ec2-public-ip>:3000
-
+```
+http://<your-ec2-public-ip>:3000
+```
 ## Additional Information
 
 - The Docker image uses a multi-stage build process to keep the final image size small
