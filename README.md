@@ -89,45 +89,6 @@ pnpm build
 The built files will be in the `dist` directory, ready to be deployed.
 
 --------------------------------------------
-Neuro Admin Dashboard – Docker Deployment Guide
-
-This guide walks you through building and running the Neuro Admin Dashboard as a Docker container.
-
-🛠️ 1. Create a Dockerfile
-
-Add a Dockerfile in the root of your NeuroAdminDashboar project directory with the necessary instructions to build and serve the application using Node.js and Nginx.
-
-📂 2. Create a .dockerignore
-
-Add a .dockerignore file to exclude unnecessary files/folders from the Docker build context, such as:
-
-node_modules
-dist
-.git
-
-🐳 3. Build Docker Image
-
-From the NeuroAdminDashboar project directory, run the following command:
-
-docker build -t neuro-admin-ui .
-
-This creates a Docker image named neuro-admin-ui.
-
-▶️ 4. Run the Docker Container
-
-Run the container with port forwarding:
-
-docker run -d -p 3000:80 --name neuro-admin-ui neuro-admin-ui
-
-The app will be accessible at:
-
-http://<your-ec2-public-ip>:3000
-
-Replace <your-ec2-public-ip> with your actual EC2 instance public IP address.
-
-✅ Done!
-
-You have now containerized and deployed the Neuro Admin Dashboard using Docker.
-
+<pre> ```bash # Neuro Admin Dashboard – Docker Deployment Guide # Step 1: Create a Dockerfile # Place the Dockerfile in the root of your NeuroAdminDashboar project. # It should define build and runtime instructions for your app. # Step 2: Create a .dockerignore file # This helps avoid sending unnecessary files to the Docker build context. # Sample .dockerignore content: node_modules dist .git Dockerfile .dockerignore # Step 3: Build the Docker Image # Run the following command from the NeuroAdminDashboar directory: docker build -t neuro-admin-ui . # Step 4: Run the Docker Container # Start a container and expose it on port 3000: docker run -d -p 3000:80 --name neuro-admin-ui neuro-admin-ui # Access the application in your browser: http://<your-ec2-public-ip>:3000 # Replace <your-ec2-public-ip> with the actual public IP of your EC2 instance. # ✅ Your Neuro Admin Dashboard is now running in a Docker container! ``` </pre>
 
 
