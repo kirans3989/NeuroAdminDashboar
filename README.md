@@ -89,13 +89,45 @@ pnpm build
 The built files will be in the `dist` directory, ready to be deployed.
 
 --------------------------------------------
-1. Create a Dockerfile
-2. Create a .dockerignore
-3. Build Docker Image
-   From the NeuroAdminDashboar directory:
-   docker build -t neuro-admin-ui .
-4. Run the Container
-   docker run -d -p 3000:80 --name neuro-admin-ui neuro-admin-ui
-   Then visit:
-📍 http://<your-ec2-public-ip>:3000
+Neuro Admin Dashboard – Docker Deployment Guide
+
+This guide walks you through building and running the Neuro Admin Dashboard as a Docker container.
+
+🛠️ 1. Create a Dockerfile
+
+Add a Dockerfile in the root of your NeuroAdminDashboar project directory with the necessary instructions to build and serve the application using Node.js and Nginx.
+
+📂 2. Create a .dockerignore
+
+Add a .dockerignore file to exclude unnecessary files/folders from the Docker build context, such as:
+
+node_modules
+dist
+.git
+
+🐳 3. Build Docker Image
+
+From the NeuroAdminDashboar project directory, run the following command:
+
+docker build -t neuro-admin-ui .
+
+This creates a Docker image named neuro-admin-ui.
+
+▶️ 4. Run the Docker Container
+
+Run the container with port forwarding:
+
+docker run -d -p 3000:80 --name neuro-admin-ui neuro-admin-ui
+
+The app will be accessible at:
+
+http://<your-ec2-public-ip>:3000
+
+Replace <your-ec2-public-ip> with your actual EC2 instance public IP address.
+
+✅ Done!
+
+You have now containerized and deployed the Neuro Admin Dashboard using Docker.
+
+
 
